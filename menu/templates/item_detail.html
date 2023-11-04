@@ -1,0 +1,26 @@
+{% load menu_tags %}
+
+<hr>
+{% if menu_items is not None %}
+	<ul>
+		<li style="display: inline;">Выберите меню:</li>
+		{% for item in menu_items %}
+			{% if item.parent_id is None %}
+				<li style="display: inline; margin-right: 5px; border: 1px solid #000; padding: 7px;">
+					<a href="{% url 'item-detail' item.id %}">{{ item.title }}</a>
+				</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+{% else %}
+	<a href="/admin">Создайте меню</a>
+{% endif %}
+
+{% if menu_dict is not None %}
+	<hr>
+	<div class="menu">
+		{{ menu_dict|draw_menu|safe }}
+	</div>
+{% endif %}
+
+<hr>
